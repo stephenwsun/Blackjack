@@ -17,6 +17,9 @@ namespace Blackjack
             //this.shuffleDeck();
         }
 
+        /// <summary>
+        /// Creates a deck of 52 cards
+        /// </summary>
         public void GenerateDeck()
         {
             this.cards.Clear();
@@ -25,18 +28,33 @@ namespace Blackjack
                     .SelectMany(s => Enumerable.Range(1, 13).Select(n => new Card((Suit)s, (Rank)n))));
         }
 
+        /// <summary>
+        /// Shuffles the cards in the deck using Fisher-Yates  modern algorithm.  
+        /// </summary>
+
+        /*************************************************************************************
+            Modern algorithm reduces the algorithm's time complexity to O(n), compared to O(n2).
+             
+            To shuffle an array a of n elements (indices 0..n-1):
+             
+            for i from n−1 downto 1 do
+                j ← random integer such that 0 ≤ j ≤ i
+                exchange a[j] and a[i]
+        *************************************************************************************/
+
         public void shuffleDeck()
         {
+            Card temp;
+            int count = cards.Count;
+            var rnd = new Random();
 
-            for(int i = 0; i < cards.Count; i++)
+            for (int i = count - 1; i > 0; i--)
             {
-                Card temp = cards[i];
-                var rnd = new Random();
-                int randomIndex = rnd.Next(i, cards.Count);               
-                cards[i] = cards[randomIndex];
-                cards[randomIndex] = temp;
+                int rndNum = rnd.Next(0, i + 1);
+                temp = cards[i];
+                cards[i] = cards[rndNum];
+                cards[rndNum] = temp;
             }
         }
-
     }
 }
