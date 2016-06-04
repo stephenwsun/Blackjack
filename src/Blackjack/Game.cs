@@ -18,13 +18,17 @@ namespace Blackjack
 
         public void Deal()
         {
-            Deck newDeck = new Deck();
-
-            
+            Deck newDeck = new Deck();         
 
             newDeck.cards.ForEach(Console.WriteLine);
             
             Console.ReadLine();
+
+            //newDeck.shuffleDeck();
+
+            //newDeck.cards.ForEach(Console.WriteLine);
+
+            //Console.ReadLine();
         }
     }
 
