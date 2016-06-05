@@ -21,28 +21,33 @@ namespace Blackjack
             this.cards.Add(card);
         }
 
-        public int Total
+        public int SoftCardTotal
         {
             get
-            {
-                // If the int value of a card is between 1 and 10 inclusive, then int value will be used for calculation. Otherwise, it will evaluate to 10 (e.g. J, Q, K)
-                return this.cards.Select(c => (int)c.Rank > 1 && (int)c.Rank < 11 ? (int)c.Rank : 10).Sum();
+            {  
+                // If there's an ace, then evaluate as 11
+                // Otherwise, if the int value of a card is between 0 and 11, then int value will be used for calculation. Otherwise, it will evaluate to 10 (e.g. J, Q, K)
+                return this.cards.Select(cardValue => (int)cardValue.Rank ==1 ? 11 : (int)cardValue.Rank > 1 && (int)cardValue.Rank < 11 ? (int)cardValue.Rank : 10).Sum();
             }
         }
 
-        public int TotalValue
+        public int HardCardTotal
         {
             get
             {
-                var totalValue = this.Total;
-                var aces = this.cards.Count(c => c.Rank == Rank.Ace);
+                // Get card total from SoftCardTotal
+                var hardCardTotal = this.SoftCardTotal;
 
-                while (aces-- > 0 && totalValue > 21)
+                // Count the number of aces in the deck
+                var numberOfAces = this.cards.Count(cardValue => cardValue.Rank == Rank.Ace);
+
+                // While there's an ace in the player's hand and the card total is greater than 21, we want Ace value to equal 1 by subtracting 10 from the card total
+                while(numberOfAces-- > 0 && hardCardTotal > 21)
                 {
-                    totalValue -= 9;
+                    hardCardTotal -= 10;
                 }
 
-                return totalValue;
+                return hardCardTotal;
             }
         }
     }

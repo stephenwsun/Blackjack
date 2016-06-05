@@ -18,7 +18,7 @@ namespace Blackjack
             this.Player = new Player();
             Deal();
 
-            while (this.Player.Hand.TotalValue < 21) {
+            while (this.Player.Hand.HardCardTotal <= 21) {
                 Console.WriteLine("Would you like to hit or stand? Press 1 for hit and 2 for stand!");
                 string option = Console.ReadLine();
 
@@ -59,13 +59,13 @@ namespace Blackjack
             // Dealer's hand
             Console.WriteLine("Dealer's Hand");
             this.deck.Deal(this.Dealer.Hand);
-            Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.TotalValue);
+            Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.HardCardTotal);
             Console.ReadLine();
 
             // Player's hand
             Console.WriteLine("Player's Hand");
             this.deck.Deal(this.Player.Hand);
-            Console.WriteLine("Player hand total = " + this.Player.Hand.TotalValue);
+            Console.WriteLine("Player hand total = " + this.Player.Hand.HardCardTotal);
             Console.ReadLine();
 
             // Print out the rest of the deck for debugging
@@ -77,52 +77,59 @@ namespace Blackjack
         {
             this.deck.DealOneCard(this.Player.Hand);
 
-            if (this.Player.Hand.Total > 21)
+            if (this.Player.Hand.HardCardTotal > 21)
             {
                 //this.Player.Balance -= this.Player.Bet;
                 //this.Dealer.Hand.Show();
                 //this.LastState = GameState.DealerWon;
                 //this.AllowedActions = GameAction.Deal;
 
-                Console.WriteLine("Player hand total = " + this.Player.Hand.TotalValue);
+                Console.WriteLine("Player hand total = " + this.Player.Hand.HardCardTotal);
                 Console.WriteLine("Bust! Sorry you lose!");
                 Console.ReadLine();
             }
-            else if (this.Player.Hand.Total == 21)
+            else if (this.Player.Hand.HardCardTotal == 21 && this.Dealer.Hand.HardCardTotal != 21)
             {
-                Console.WriteLine("Player hand total = " + this.Player.Hand.TotalValue);
+                Console.WriteLine("Player hand total = " + this.Player.Hand.HardCardTotal);
                 Console.WriteLine("BLACKJACK!!!");
+                Console.ReadLine();
             }
             else
             {
-                Console.WriteLine("Player hand total = " + this.Player.Hand.TotalValue);
+                Console.WriteLine("Player hand total = " + this.Player.Hand.HardCardTotal);
                 Console.ReadLine();
             }
         }
 
         public void Stand()
         {
-            while (this.Dealer.Hand.TotalValue < 17)
+            while (this.Dealer.Hand.SoftCardTotal < 17)
             {
                 this.deck.DealOneCard(this.Dealer.Hand);
-                Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.TotalValue);
+                Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.SoftCardTotal);
             }
 
-            if (this.Dealer.Hand.TotalValue > 21 || (this.Player.Hand.TotalValue > this.Dealer.Hand.TotalValue))
+            if (this.Dealer.Hand.HardCardTotal > 21 || (this.Player.Hand.HardCardTotal > this.Dealer.Hand.HardCardTotal))
             {
                 //this.Player.Balance += this.Player.Bet;
                 //this.LastState = GameState.PlayerWon;
 
-                Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.Total);
+                Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.HardCardTotal);
                 Console.WriteLine("Congratulations! You've won!");
                 Console.ReadLine();
             }
-            else if (this.Dealer.Hand.TotalValue == this.Player.Hand.TotalValue)
+            else if (this.Dealer.Hand.HardCardTotal == this.Player.Hand.HardCardTotal)
             {
                 //this.LastState = GameState.Draw;
 
-                Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.TotalValue);
+                Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.HardCardTotal);
                 Console.WriteLine("It's a tie...FeelsBadMan");
+                Console.ReadLine();
+            }
+            else if (this.Player.Hand.HardCardTotal == 21 && this.Dealer.Hand.HardCardTotal != 21)
+            {
+                Console.WriteLine("Player hand total = " + this.Player.Hand.HardCardTotal);
+                Console.WriteLine("BLACKJACK!!!");
                 Console.ReadLine();
             }
             else
@@ -130,7 +137,7 @@ namespace Blackjack
                 //this.Player.Balance -= this.Player.Bet;
                 //this.LastState = GameState.DealerWon;
 
-                Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.TotalValue);
+                Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.HardCardTotal);
                 Console.WriteLine("You lose! Better luck next time!");
                 Console.ReadLine();
             }
