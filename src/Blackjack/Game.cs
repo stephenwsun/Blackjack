@@ -8,9 +8,14 @@ namespace Blackjack
     public class Game
     {
         private Deck deck;
+        public Player Player { get; private set; }
+
+        public Dealer Dealer { get; private set; }
 
         public Game()
         {
+            this.Dealer = new Dealer();
+            this.Player = new Player();
             Deal();
 
             
@@ -18,17 +23,37 @@ namespace Blackjack
 
         public void Deal()
         {
-            Deck newDeck = new Deck();         
+            if (this.deck == null)
+            {
+                this.deck = new Deck();
+            }
+            else
+            {
+                this.deck.GenerateDeck();
+            }
 
-            newDeck.cards.ForEach(Console.WriteLine);
-            
-            Console.ReadLine();
+            this.deck.cards.ForEach(Console.WriteLine);
 
-            //newDeck.shuffleDeck();
+            //Deck newDeck = new Deck();         
 
             //newDeck.cards.ForEach(Console.WriteLine);
 
-            //Console.ReadLine();
+            Console.WriteLine("Done generating random deck");
+
+            Console.WriteLine("Dealer's Hand");
+            this.deck.Deal(this.Dealer.Hand);
+
+            Console.ReadLine();
+
+            Console.WriteLine("Player's Hand");
+            this.deck.Deal(this.Player.Hand);
+            
+            Console.ReadLine();
+
+            this.deck.cards.ForEach(Console.WriteLine);
+
+            Console.ReadLine();
+
         }
     }
 

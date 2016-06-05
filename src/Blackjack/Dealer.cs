@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace Blackjack
 {
-    public class Player
+    public class Dealer
     {
         public Hand Hand { get; set; }
 
-        public Player()
+        public Dealer()
         {
-            this.Hand = new Hand(isDealer: false);
+            this.Hand = new Hand(isDealer: true);
         }
     }
 }

@@ -27,16 +27,16 @@ namespace Blackjack
 
             switch (this.Suit)
             {
-                case Suit.Club:
+                case Suit.Clubs:
                     suit = "Clubs";
                     break;
-                case Suit.Diamond:
+                case Suit.Diamonds:
                     suit = "Diamonds";
                     break;
-                case Suit.Heart:
+                case Suit.Hearts:
                     suit = "Hearts";
                     break;
-                case Suit.Spade:
+                case Suit.Spades:
                     suit = "Spades";
                     break;
             }
@@ -54,10 +54,10 @@ namespace Blackjack
 
     public enum Suit
     {
-        Club = 1,
-        Diamond = 2,
-        Heart = 3,
-        Spade = 4
+        Clubs = 1,
+        Diamonds = 2,
+        Hearts = 3,
+        Spades = 4
     }
 
     public enum Rank

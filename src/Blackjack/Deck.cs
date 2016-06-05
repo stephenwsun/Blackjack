@@ -13,8 +13,6 @@ namespace Blackjack
         {
             this.GenerateDeck();
             this.shuffleDeck();
-            //this.shuffleDeck();
-            //this.shuffleDeck();
         }
 
         /// <summary>
@@ -33,13 +31,13 @@ namespace Blackjack
         /// </summary>
 
         /*************************************************************************************
-            Modern algorithm reduces the algorithm's time complexity to O(n), compared to O(n2).
+          Modern algorithm reduces the algorithm's time complexity to O(n), compared to O(n2).
              
-            To shuffle an array a of n elements (indices 0..n-1):
+          To shuffle an array a of n elements (indices 0..n-1):
              
-            for i from n−1 downto 1 do
-                j ← random integer such that 0 ≤ j ≤ i
-                exchange a[j] and a[i]
+          for i from n−1 downto 1 do
+              j ← random integer such that 0 ≤ j ≤ i
+              exchange a[j] and a[i]
         *************************************************************************************/
 
         public void shuffleDeck()
@@ -55,6 +53,37 @@ namespace Blackjack
                 cards[i] = cards[rndNum];
                 cards[rndNum] = temp;
             }
+        }
+
+        public void Deal(Hand hand)
+        {
+            //List<Card> firstTwoCards = cards.GetRange(0,2);
+
+            //firstTwoCards.ForEach(Console.WriteLine);
+
+            var card = this.cards.First();
+            hand.AddCard(card);
+            Console.WriteLine(card);
+
+            //Console.WriteLine("________________");
+            //Console.WriteLine("|              |");
+            //Console.WriteLine("| {0} {1}   |", card.Rank, card.Suit);
+            //Console.WriteLine("|              |");
+            //Console.WriteLine("|              |");
+            //Console.WriteLine("|              |");
+            //Console.WriteLine("|              |");
+            //Console.WriteLine("|              |");
+            //Console.WriteLine("|              |");
+            //Console.WriteLine("|              |");
+            //Console.WriteLine("________________");
+
+            this.cards.Remove(card);
+
+            card = this.cards.First();
+
+            hand.AddCard(card);
+            Console.WriteLine(card);
+            this.cards.Remove(card);
         }
     }
 }
