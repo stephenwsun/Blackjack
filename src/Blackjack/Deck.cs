@@ -55,6 +55,10 @@ namespace Blackjack
             }
         }
 
+        /// <summary>
+        /// Deals two cards, used for starting game
+        /// </summary>
+        /// <param name="hand"></param>
         public void Deal(Hand hand)
         {
             //List<Card> firstTwoCards = cards.GetRange(0,2);
@@ -62,28 +66,36 @@ namespace Blackjack
             //firstTwoCards.ForEach(Console.WriteLine);
 
             var card = this.cards.First();
+
             hand.AddCard(card);
             Console.WriteLine(card);
-
-            //Console.WriteLine("________________");
-            //Console.WriteLine("|              |");
-            //Console.WriteLine("| {0} {1}   |", card.Rank, card.Suit);
-            //Console.WriteLine("|              |");
-            //Console.WriteLine("|              |");
-            //Console.WriteLine("|              |");
-            //Console.WriteLine("|              |");
-            //Console.WriteLine("|              |");
-            //Console.WriteLine("|              |");
-            //Console.WriteLine("|              |");
-            //Console.WriteLine("________________");
-
             this.cards.Remove(card);
 
             card = this.cards.First();
-
             hand.AddCard(card);
             Console.WriteLine(card);
             this.cards.Remove(card);
+        }
+
+        /// <summary>
+        /// Deals one card, used for player's "hit" option
+        /// </summary>
+        /// <param name="hand"></param>
+        public void DealOneCard(Hand hand)
+        {
+            //if (this.cards.Count < 1)
+            //{
+            //    TODO: Add a descriptive error message
+            //    throw new InvalidOperationException();
+            //}
+
+            var card = this.cards.First();
+            hand.AddCard(card);
+            Console.WriteLine(card);
+
+            //hand.AddCard(this.cards.First());
+            //Console.WriteLine(card);
+            this.cards.RemoveAt(0);
         }
     }
 }
