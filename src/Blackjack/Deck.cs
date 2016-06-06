@@ -83,12 +83,6 @@ namespace Blackjack
         /// <param name="hand"></param>
         public void DealOneCard(Hand hand)
         {
-            //if (this.cards.Count < 1)
-            //{
-            //    TODO: Add a descriptive error message
-            //    throw new InvalidOperationException();
-            //}
-
             var card = this.cards.First();
             hand.AddCard(card);
             Console.WriteLine(card);

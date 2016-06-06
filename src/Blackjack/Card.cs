@@ -10,16 +10,11 @@ namespace Blackjack
         public Card(Suit suit, Rank rank)
         {
             this.Suit = suit;
-            this.Rank = rank;
-            
-                     
+            this.Rank = rank;                   
         }
-
 
         public Rank Rank { get; set; }
         public Suit Suit { get; set; }
-
-
 
         public override string ToString()
         {
@@ -47,9 +42,6 @@ namespace Blackjack
 
             return value + " of " + suit;
         }
-
-
-
     }
 
     public enum Suit

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Blackjack
 {
-    public class Player
+    public class Player : Gamble
     {
         public Hand Hand { get; set; }
 
