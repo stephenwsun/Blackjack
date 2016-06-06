@@ -9,23 +9,31 @@ namespace Blackjack
     {
         public static void Main(string[] args)
         {
-            while (true)
-            {
+            Console.Title = "Blackjack Game by Stephen Sun";
 
+            Console.WriteLine("\nWelcome to the game of BlackJack\n");
+            Console.WriteLine("----------------------------------------------------");
+            Console.WriteLine("You have $500 in your account");
+            Console.WriteLine("All bets are currently $10");
+            Console.WriteLine("----------------------------------------------------\n");
+
+
+            // Set how much money you want in your account and how much you want to bet for each hand
+            Game.Gamble(500, 10);
+
+            while (Player.Balance > 0)
+            {
                 Game game = new Game();
 
-                game.Play(500, 10);
+                Console.WriteLine("Would you like to play again? Press any key to continue...ESC to quit");
 
-                Console.WriteLine("Would you like to play again?");
-                var playerReply = Console.ReadLine();
-
-                if (playerReply == "Yes")
+                if (Console.ReadKey().Key != ConsoleKey.Escape)
                 {
                     continue;
                 }
                 else
                 {
-                    Console.WriteLine("\nGoodbye!");
+                    Console.WriteLine("\nGoodbye! Bring more money next time!");
                     Console.ReadLine();
                     break;
                 }

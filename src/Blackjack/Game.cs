@@ -17,30 +17,26 @@ namespace Blackjack
             this.Dealer = new Dealer();
             this.Player = new Player();
 
-            //Play(500, 10);
-
+            bool playerTurnComplete = false;
             
 
-            bool turnComplete = false;
-
-                
             Deal();
 
-            while (turnComplete == false && this.Player.Hand.HardCardTotal < 21)
+            while (playerTurnComplete == false && this.Player.Hand.HardCardTotal < 21)
             {
-                Console.WriteLine("Would you like to hit or stand? Press 1 for hit and 2 for stand!");
-                string option = Console.ReadLine();
+                Console.WriteLine("\nWould you like to Hit or Stand? Press ENTER for Hit and SPACEBAR for Stand!");
+                var userInput = Console.ReadKey();
 
-                switch (option)
+                switch (userInput.Key)
                 {
-                    case "1":
+                    case ConsoleKey.Enter:
                         Hit();
-                        turnComplete = false;
+                        playerTurnComplete = false;
                         break;
 
-                    case "2":
+                    case ConsoleKey.Spacebar:
                         Stand();
-                        turnComplete = true;
+                        playerTurnComplete = true;
                         break;
                 }
             }            
@@ -64,22 +60,31 @@ namespace Blackjack
             //this.deck.cards.ForEach(Console.WriteLine);  
             //Console.WriteLine("\nDone generating random deck\n");
 
-            Console.WriteLine("Balance: " + this.Player.Balance);
+            //Console.WriteLine("Balance: $" + Player.Balance);
+            Console.WriteLine("Press any key to start playing...");
             Console.ReadLine();
 
             // Dealer's hand
+            Console.WriteLine("------------------");
             Console.WriteLine("Dealer's Hand");
-            this.deck.Deal(this.Dealer.Hand);
-            Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.HardCardTotal);
-            Console.ReadLine();
+            Console.WriteLine("------------------");
+            this.deck.DealDealer(this.Dealer.Hand);
+
+            // Prints out the dealer's card total for opening hand - debugging only
+            //Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.HardCardTotal);
+            //Console.ReadLine();
 
             // Player's hand
-            Console.WriteLine("Player's Hand");
+            Console.WriteLine("------------------");
+            Console.WriteLine("Your Hand");
+            Console.WriteLine("------------------");
             this.deck.Deal(this.Player.Hand);
-            Console.WriteLine("Player hand total = " + this.Player.Hand.HardCardTotal);
-            Console.ReadLine();
 
-            // Print out the rest of the deck for debugging
+            // Prints out the player's card total for opening hand - debugging only
+            Console.WriteLine("\nYou have " + this.Player.Hand.HardCardTotal);
+            //Console.ReadLine();
+
+            // Print out the rest of the deck - debugging only
             //this.deck.cards.ForEach(Console.WriteLine);
             //Console.ReadLine();
         }
@@ -93,24 +98,25 @@ namespace Blackjack
 
             if (this.Player.Hand.HardCardTotal > 21)
             {
-                this.Player.Balance -= this.Player.Bet;
-                Console.WriteLine("Balance: " + this.Player.Balance);
-
-                Console.WriteLine("Player hand total = " + this.Player.Hand.HardCardTotal);
+                Player.Balance -= Player.Bet;
+                
+                Console.WriteLine("You have " + this.Player.Hand.HardCardTotal);
                 Console.WriteLine("Bust! Sorry you lose!");
+                Console.WriteLine("Current Account Balance: $" + Player.Balance);
                 Console.ReadLine();
             }
             else if (this.Player.Hand.HardCardTotal == 21 && this.Dealer.Hand.HardCardTotal != 21)
             {
-                this.Player.Balance += this.Player.Bet * 2;
-
-                Console.WriteLine("Player hand total = " + this.Player.Hand.HardCardTotal);
+                Player.Balance += Player.Bet * 2;
+                
+                Console.WriteLine("You have " + this.Player.Hand.HardCardTotal);
                 Console.WriteLine("BLACKJACK!!!");
+                Console.WriteLine("Current Account Balance: $" + Player.Balance);
                 Console.ReadLine();
             }
             else
             {
-                Console.WriteLine("Player hand total = " + this.Player.Hand.HardCardTotal);
+                Console.WriteLine("You have " + this.Player.Hand.HardCardTotal);
                 Console.ReadLine();
             }
         }
@@ -120,53 +126,57 @@ namespace Blackjack
         /// </summary>
         public void Stand()
         {
+            Console.WriteLine("\nDealer has " + this.Dealer.Hand.HardCardTotal + " in hand\n");
+
             while (this.Dealer.Hand.HardCardTotal < 17)
-            {
+            {               
                 this.deck.DealOneCard(this.Dealer.Hand);
-                Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.HardCardTotal);
+                Console.WriteLine("Dealer has \n" + this.Dealer.Hand.HardCardTotal);
             }
 
             if (this.Dealer.Hand.HardCardTotal > 21 || (this.Player.Hand.HardCardTotal > this.Dealer.Hand.HardCardTotal))
             {
-                this.Player.Balance += this.Player.Bet * 2;
-
-                Console.WriteLine("Balance: " + this.Player.Balance);
-                Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.HardCardTotal);
+                Player.Balance += Player.Bet * 2;
+               
+                //Console.WriteLine("Dealer has " + this.Dealer.Hand.HardCardTotal);
                 Console.WriteLine("Congratulations! You've won!");
+                Console.WriteLine("\nCurrent Account Balance: $" + Player.Balance);
                 Console.ReadLine();
             }
+
             else if (this.Dealer.Hand.HardCardTotal == this.Player.Hand.HardCardTotal)
-            {
-                Console.WriteLine("Balance: " + this.Player.Balance);
-                Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.HardCardTotal);
+            {                
+                Console.WriteLine("Dealer has " + this.Dealer.Hand.HardCardTotal);
                 Console.WriteLine("It's a tie...FeelsBadMan");
+                Console.WriteLine("\nCurrent Account Balance: $" + Player.Balance);
                 Console.ReadLine();
             }
+
             else if (this.Player.Hand.HardCardTotal == 21 && this.Dealer.Hand.HardCardTotal != 21)
             {
-                this.Player.Balance += this.Player.Bet * 2;                
-                Console.WriteLine("Balance: " + this.Player.Balance);
-
-                Console.WriteLine("Player hand total = " + this.Player.Hand.HardCardTotal);
+                Player.Balance += Player.Bet * 2;
+                
+                Console.WriteLine("You have " + this.Player.Hand.HardCardTotal);
                 Console.WriteLine("BLACKJACK!!!");
+                Console.WriteLine("\nCurrent Account Balance: $" + Player.Balance);
                 Console.ReadLine();
             }
+
             else
             {
-                this.Player.Balance -= this.Player.Bet;
-                Console.WriteLine("Balance: " + this.Player.Balance);
-
-                Console.WriteLine("Dealer hand total = " + this.Dealer.Hand.HardCardTotal);
+                Player.Balance -= Player.Bet;
+                
+                Console.WriteLine("Dealer has " + this.Dealer.Hand.HardCardTotal);
                 Console.WriteLine("You lose! Better luck next time!");
+                Console.WriteLine("\nCurrent Account Balance: $" + Player.Balance);
                 Console.ReadLine();
             }
         }
 
-        public void Play(decimal balance, decimal bet)
+        public static void Gamble(decimal balance, decimal bet)
         {
-            this.Player.Balance = balance;
-            this.Player.Bet = bet;
-
+            Player.Balance = balance;
+            Player.Bet = bet;
         }
     }
 

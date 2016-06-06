@@ -61,10 +61,6 @@ namespace Blackjack
         /// <param name="hand"></param>
         public void Deal(Hand hand)
         {
-            //List<Card> firstTwoCards = cards.GetRange(0,2);
-
-            //firstTwoCards.ForEach(Console.WriteLine);
-
             var card = this.cards.First();
 
             hand.AddCard(card);
@@ -77,6 +73,20 @@ namespace Blackjack
             this.cards.Remove(card);
         }
 
+        public void DealDealer(Hand hand)
+        {
+            var card = this.cards.First();
+
+            hand.AddCard(card);
+            Console.WriteLine(card);
+            this.cards.Remove(card);
+
+            card = this.cards.First();
+            hand.AddCard(card);
+            Console.WriteLine("XX\n");
+            this.cards.Remove(card);
+        }
+
         /// <summary>
         /// Deals one card, used for player's "hit" option
         /// </summary>
@@ -85,10 +95,12 @@ namespace Blackjack
         {
             var card = this.cards.First();
             hand.AddCard(card);
-            Console.WriteLine(card);
 
-            //hand.AddCard(this.cards.First());
-            //Console.WriteLine(card);
+            Console.WriteLine("\nNew Card:");
+            Console.WriteLine(card);
+            //Console.WriteLine("\n");
+            Console.ReadLine();
+
             this.cards.RemoveAt(0);
         }
     }

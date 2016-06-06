@@ -7,55 +7,55 @@ namespace Blackjack
 {
     public class Gamble
     {
-        private decimal balance;
-        private decimal bet;
+        private static decimal balance;
+        private static decimal bet;
 
-        public decimal Balance
+        public static decimal Balance
         {
             get
             {
-                return this.balance;
+                return balance;
             }
 
             set
             {
-                if (this.balance != value)
+                if (balance != value)
                 {
-                    this.balance = value;
+                    balance = value;
                 }
             }
         }
 
-        public decimal Bet
+        public static decimal Bet
         {
             get
             {
-                return this.bet;
+                return bet;
             }
 
             set
             {
-                if (this.bet == value)
+                if (bet == value)
                 {
                     return;
                 }
 
-                if (value > this.balance + this.bet && this.balance > 0)
+                if (value > balance + bet && balance > 0)
                 {
-                    this.bet += this.balance;
-                    this.Balance = 0;
+                    bet += balance;
+                    Balance = 0;
                 }
-                else if (value < 0 && this.bet > 0)
+                else if (value < 0 && bet > 0)
                 {
-                    var temp = this.bet + this.balance;
-                    this.bet = 0;
-                    this.Balance = temp;
+                    var temp = bet + balance;
+                    bet = 0;
+                    Balance = temp;
                 }
-                else if (value >= 0 && value <= this.balance + this.bet)
+                else if (value >= 0 && value <= balance + bet)
                 {
-                    var temp = this.balance + this.bet;
-                    this.bet = value;
-                    this.Balance = temp - value;
+                    var temp = balance + bet;
+                    bet = value;
+                    Balance = temp - value;
                 }
             }
         }
