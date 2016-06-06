@@ -19,7 +19,6 @@ namespace Blackjack
 
             bool playerTurnComplete = false;
             
-
             Deal();
 
             while (playerTurnComplete == false && this.Player.Hand.HardCardTotal < 21)
