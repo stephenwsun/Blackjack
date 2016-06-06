@@ -173,6 +173,11 @@ namespace Blackjack
             }
         }
 
+        /// <summary>
+        /// This method is used to set the starting balance for gambling and also individual bet amounts
+        /// </summary>
+        /// <param name="balance"></param>
+        /// <param name="bet"></param>
         public static void Gamble(decimal balance, decimal bet)
         {
             Player.Balance = balance;

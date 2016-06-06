@@ -9,6 +9,7 @@ namespace Blackjack
     {
         public Hand Hand { get; set; }
 
+        // Creates hand for Dealer
         public Dealer()
         {
             this.Hand = new Hand(isDealer: true);

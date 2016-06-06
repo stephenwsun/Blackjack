@@ -10,6 +10,7 @@ namespace Blackjack
         private static decimal balance;
         private static decimal bet;
 
+        // Allows the starting balance to be set and when the Gamble method is called, the current balance will be returned
         public static decimal Balance
         {
             get
@@ -26,6 +27,7 @@ namespace Blackjack
             }
         }
 
+        // Stack Overflow
         public static decimal Bet
         {
             get

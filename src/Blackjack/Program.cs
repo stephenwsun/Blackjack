@@ -11,6 +11,7 @@ namespace Blackjack
         {
             Console.Title = "Blackjack Game by Stephen Sun";
 
+            // Intro text
             Console.WriteLine("\nWelcome to the game of BlackJack\n");
             Console.WriteLine("----------------------------------------------------");
             Console.WriteLine("You have $500 in your account");
@@ -21,6 +22,7 @@ namespace Blackjack
             // Set how much money you want in your account and how much you want to bet for each hand
             Game.Gamble(500, 10);
 
+            // Allows the user to continue playing until the balance is zero or presses the ESC key at the end of a game
             while (Player.Balance > 0)
             {
                 Game game = new Game();

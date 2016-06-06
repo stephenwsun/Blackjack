@@ -16,11 +16,18 @@ namespace Blackjack
 
         public bool IsDealer { get; set; }
 
+        /// <summary>
+        /// Gets one card from the card list
+        /// </summary>
+        /// <param name="card"></param>
         public void AddCard(Card card)
         {
             this.cards.Add(card);
         }
 
+        /// <summary>
+        /// This method searches for all the cards in a hand and calculates the sum for all soft hands
+        /// </summary>
         public int SoftCardTotal
         {
             get
@@ -31,6 +38,9 @@ namespace Blackjack
             }
         }
 
+        /// <summary>
+        /// This method takes the sum of the soft total and adds on the logic for when Aces should be equal to 1
+        /// </summary>
         public int HardCardTotal
         {
             get
